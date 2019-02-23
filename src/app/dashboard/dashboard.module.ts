@@ -3,25 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
-import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { SharedModule } from '../shared/shared.module';
-import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { AdminCanLoadGuard } from './guards/admin-can-load.guard';
 import { AdminCanActivateGuard } from './guards/admin-can-activate.guard';
 import { DashboardSharedComponentsModule } from '../shared/dashboard-shared-components.module';
-import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ModalComponent } from './modal/modal.component';
+import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: '/admin/users' },
+      { path: '', pathMatch: 'full', redirectTo: '/profile/personal-info' },
       {
-        path: 'profile', component: ProfilePageComponent, children: [
-          { path: '', pathMatch: 'full', component: ProfileViewComponent },
-          { path: 'edit', component: ProfileEditComponent },
+        path: 'profile',
+        component: ProfilePageComponent,
+        children: [
+          { path: 'personal-info', component: PersonalInfoComponent },
+          { path: '', pathMatch: 'full', redirectTo: '/profile/personal-info' }
         ]
       },
       {
@@ -40,17 +40,16 @@ const routes: Routes = [
   imports: [
     SharedModule,
     DashboardSharedComponentsModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
   exports: [],
   declarations: [
     ProfilePageComponent,
     NotFoundPageComponent,
     DashboardLayoutComponent,
-    UserEditComponent,
-    ModalComponent,
+    ModalComponent
   ],
 
   providers: [AdminCanLoadGuard, AdminCanActivateGuard]
 })
-export class DashboardModule { }
+export class DashboardModule {}

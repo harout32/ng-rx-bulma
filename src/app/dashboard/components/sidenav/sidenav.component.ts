@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { State } from '../../../reducers';
 import { isAdmin } from '../../../auth/auth.selectors';
 import { shareReplay } from 'rxjs/operators';
+import { Logout } from '../../../auth/auth.actions';
 
 @Component({
   selector: 'app-sidenav',
@@ -25,5 +26,8 @@ export class SidenavComponent implements OnInit {
   }
   toggleSideMenue() {
     this.sideMenueCollapsed = !this.sideMenueCollapsed;
+  }
+  logout() {
+    this.store.dispatch(new Logout());
   }
 }

@@ -12,6 +12,7 @@ import {
 } from '../../../validators';
 import { User } from '../../../models';
 import { tap } from 'rxjs/operators';
+import { ModalService } from '../../modal/modal.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -19,33 +20,21 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
-  @Input() user$: Observable<User>;
+  @Input() user: User;
   @Input() allowEditName: boolean;
-  @Input() isLoading$: Observable<boolean>;
   editForm: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit() {
-    this.user$
-      .pipe(
-        tap(({ name, age, dateOfBirth, dayOfNextNotification, dayOfLogin }) => {
-          const userData = {
-            name,
-            age,
-            dateOfBirth,
-            dayOfNextNotification,
-            dayOfLogin
-          };
-          this.editForm.patchValue(userData);
-        })
-      )
-      .subscribe(noop);
-
     this.editForm = this.fb.group({
       name: [
         '',
         [Validators.required, ValidUserName],
-        ValidateUserNameNotTaken(this.authService)
+        ValidateUserNameNotTaken(this.user.name, this.authService)
       ],
       age: ['', [Validators.required, ValidAge]],
       dateOfBirth: ['', [Validators.required, ValidDate('YYYY/MM/DD')]],
@@ -55,12 +44,22 @@ export class UserEditComponent implements OnInit {
       ],
       dayOfLogin: ['', [Validators.required, ValidDate('DD MMM YYYY')]]
     });
+    // const userData = {
+    //   name,
+    //   age,
+    //   dateOfBirth,
+    //   dayOfNextNotification,
+    //   dayOfLogin
+    // };
+    this.editForm.patchValue(this.user);
   }
   submit() {
     const data = {
+      ...this.user,
       ...this.editForm.value,
       age: +this.editForm.value.age
     };
+    this.modalService.close(data);
     // this.store.dispatch(new EditUserApiAction(data));
   }
   isFieldTouched(fieldName: string) {

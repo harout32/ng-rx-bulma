@@ -78,3 +78,15 @@
 .side-nav-outlet {
   flex-grow: 1;
 }
+
+.background-gradient {
+  height: 100vh;
+  background-image: linear-gradient(
+    to left top,
+    #209cee,
+    #00adee,
+    #00bce2,
+    #00c8cc,
+    #00d1b2
+  );
+}

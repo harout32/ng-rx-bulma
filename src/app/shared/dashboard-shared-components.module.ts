@@ -1,34 +1,34 @@
 import { NgModule } from '@angular/core';
 
 import {
-  ProfileEditComponent,
   SidenavComponent,
-  ProfileViewComponent,
   UserChoosenComponent,
   UserDropdownItemComponent,
   UserDropdownListComponent,
   UserListComponent,
   UserViewComponent,
-  CanfirmComponent
+  CanfirmComponent,
+  UserEditComponent,
+  PersonalInfoComponent
 } from '../dashboard/components';
 import { SharedModule } from './shared.module';
 
 const COMPONENTS = [
-  ProfileEditComponent,
   SidenavComponent,
-  ProfileViewComponent,
   UserChoosenComponent,
   UserDropdownItemComponent,
   UserDropdownListComponent,
   UserListComponent,
   UserViewComponent,
-  CanfirmComponent
+  CanfirmComponent,
+  UserEditComponent,
+  PersonalInfoComponent
 ];
 @NgModule({
   imports: [SharedModule],
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS],
-  entryComponents: [CanfirmComponent],
+  entryComponents: [CanfirmComponent, UserEditComponent],
   providers: []
 })
-export class DashboardSharedComponentsModule { }
+export class DashboardSharedComponentsModule {}

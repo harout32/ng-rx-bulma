@@ -1,4 +1,11 @@
-<p>
-  canfirm works!
-</p>
-{{message}}
+<div class="confirm-wrapper">
+  <div class="card-content">    
+    <p class="is-size-5">{{ message | translate: params }}</p>
+    <div class="buttons">
+      <span class="button is-success is-rounded" (click)="success()"
+        >Confirm</span
+      >
+      <span class="button is-danger is-rounded" (click)="cancel()">Cancel</span>
+    </div>
+  </div>
+</div>

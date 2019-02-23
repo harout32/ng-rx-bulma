@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="columns">
+    <div class="column">
+      <div class="is-capitalized">
+        <h2>{{ 'common.personalInfo' | translate }}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <div class="card card-wrapper">
+        <header class="card-header">
+          <p class="card-header-title">
+            {{ 'common.profile' | translate }}
+          </p>
+        </header>
+        <div class="card-content">
+          <div *ngIf="(user$ | async) as user">
+            <app-user-view [user]="user"></app-user-view>
+            <div class="columns">
+              <div class="column">
+                <div class="field">
+                  <div class="buttons is-centered is-vcentered">
+                    <button
+                      class="button is-rounded is-primary"
+                      (click)="edit(user)"
+                      [ngClass]="(isLoading$ | async) ? 'is-loading' : ''"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

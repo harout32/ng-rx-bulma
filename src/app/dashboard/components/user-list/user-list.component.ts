@@ -7,7 +7,9 @@ import { State } from '../../../reducers';
 import { Store, select } from '@ngrx/store';
 import {
   SetUserListAction,
-  SelectChoosenUserAction
+  SelectChoosenUserAction,
+  DeleteChoosenUserAction,
+  EditChoosenUserAction
 } from '../../pages/admin-page/admin.actions';
 import { User } from 'src/app/models';
 import {
@@ -66,12 +68,22 @@ export class UserListComponent implements OnInit {
       .subscribe(noop);
   }
   selectUser(user: User) {
-    console.log(user);
-    this.searchForm.patchValue(
-      { search: user.name },
-      { emitEvent: false, onlySelf: true }
-    );
+    this.setUserNameToSearchInput(user.name);
     this.store.dispatch(new SelectChoosenUserAction(user));
     this.store.dispatch(new SetUserListAction([]));
+  }
+  deleteUser() {
+    console.log('delete');
+    this.store.dispatch(new DeleteChoosenUserAction());
+  }
+  editUser(user: User) {
+    this.setUserNameToSearchInput(user.name);
+    this.store.dispatch(new EditChoosenUserAction(user));
+  }
+  private setUserNameToSearchInput(name: string) {
+    this.searchForm.patchValue(
+      { search: name },
+      { emitEvent: false, onlySelf: true }
+    );
   }
 }

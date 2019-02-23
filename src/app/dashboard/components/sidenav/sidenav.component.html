@@ -1,11 +1,14 @@
 <aside
-  class="menu side-menu"
+  class="menu side-menu has-background-primary"
   [ngClass]="{ 'side-menu-collaped': sideMenueCollapsed }"
 >
-  <ul class="menu-list">
+<div class="flex">
+
+
+  <ul class="menu-list items">
     <li class="has-text-centered">
-      <a (click)="toggleSideMenue()">
-        <span class="icons has-text-black ">
+      <a (click)="toggleSideMenue()" class="has-text-white">
+        <span class="icons ">
           <i
             class="typcn "
             [ngClass]="
@@ -19,8 +22,12 @@
       <li
         *ngIf="(item.adminRequired && isAdmin$ | async) || !item.adminRequired"
       >
-        <a [routerLink]="[item.route]" routerLinkActive="is-active">
-          <span class="icons has-text-black">
+        <a
+          [routerLink]="[item.route]"
+          class="has-text-white"
+          routerLinkActive="has-background-white-ter has-text-primary"
+        >
+          <span class="icons">
             <i [class]="item.icon"></i>
           </span>
           <span class="side-item">
@@ -38,6 +45,19 @@
       </li>
     </ng-template>
   </ul>
+  <ul class="menu-list logout">
+    <li>
+      <a class="has-text-white" (click)="logout()">
+        <span class="icons">
+          <i class="typcn typcn-power"></i>
+        </span>
+        <span class="side-item">
+          {{ 'common.logout' | translate }}
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
 </aside>
 
 <ng-template #childrenTemplate let-children="children">
@@ -48,8 +68,12 @@
           (child.adminRequired && isAdmin$ | async) || !child.adminRequired
         "
       >
-        <a [routerLink]="[child.route]" routerLinkActive="is-active">
-          <span class="icons has-text-black">
+        <a
+          [routerLink]="[child.route]"
+          class="has-text-white"
+          routerLinkActive="has-background-white-ter has-text-primary"
+        >
+          <span class="icons">
             <i [class]="child.icon"></i>
           </span>
           <span class="side-item">

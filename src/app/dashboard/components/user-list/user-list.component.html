@@ -1,5 +1,12 @@
 <div class="columns">
   <div class="column">
+    <div class="is-capitalized">
+      <h2>{{'common.users' | translate}}</h2>
+    </div>
+  </div>
+</div>
+<div class="columns">
+  <div class="column" style="width: 100%">
     <form [formGroup]="searchForm">
       <div class="field">
         <div class="control" [ngClass]="isSearchLoading ? 'is-loading' : ''">
@@ -13,13 +20,15 @@
       </div>
     </form>
     <app-user-dropdown-list >
-      <ng-template ngFor let-user [ngForOf]="userList$ | async">
+      <ng-template ngFor let-user [ngForOf]="(userList$ | async)">
         <app-user-dropdown-item [user]="user" [seletedUser$]="selectedUser$" (whenSelect)="selectUser($event)"></app-user-dropdown-item>
       </ng-template>
     </app-user-dropdown-list>
-    <app-user-choosen [user$]="selectedUser$">
-
-    </app-user-choosen>
+    <div class="choosen-content">
+      <app-user-choosen [user$]="selectedUser$" (delete)="deleteUser()" (edit)="editUser($event)">
+  
+      </app-user-choosen>
+    </div>
   </div>
   <!-- <div class="dropdown-menu quick-search">
             <div class="dropdown-content">

@@ -34,7 +34,7 @@ export class AuthService {
     );
   }
   editUser(userData: UserEdit) {
-    return of({ message: 'successfuly user updated', status: 200 }).pipe(
+    return of(userData).pipe(
       delay(3000),
       tap(console.log)
     );

@@ -8,13 +8,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-dropdown-item.component.scss']
 })
 export class UserDropdownItemComponent implements OnInit {
-@Input()user: User;
-@Input()seletedUser$: Observable<User>;
-@Output()whenSelect: EventEmitter<User> = new EventEmitter();
-  constructor() { }
+  @Input() user: User;
+  @Input() seletedUser$: Observable<{ user: User; isLoading: boolean }>;
+  @Output() whenSelect: EventEmitter<User> = new EventEmitter();
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   select() {
     this.whenSelect.emit(this.user);
   }

@@ -16,7 +16,7 @@
           type="text"
           placeholder="a-z no symbol or number"
           formControlName="name"
-          [readonly]="true"
+          [readonly]="!allowEditName"
         />
         <span class="icon is-right has-text-primary" *ngIf="!editForm.get('name').hasError('userNameTaken') && editForm.get('name').status !== 'PENDING'">
           <i class="typcn typcn-tick"></i>
@@ -186,7 +186,6 @@
     <div class="field buttons is-centered">
       <button
         class="button is-primary is-rounded is-centered"
-        [ngClass]="{'is-loading': isLoading}"
         [disabled]="!editForm.valid"
         type="submit"
       >

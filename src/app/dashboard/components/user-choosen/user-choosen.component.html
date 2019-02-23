@@ -1,13 +1,31 @@
 <div class="columns  is-centered">
-    <div class="column is-half">
-      <div *ngIf="(user$ | async) as user" class="card  ">
+  <div class="column is-half">
+    <span *ngIf="(user$ | async) as userData">
+      <div *ngIf="userData.user" class="card  ">
         <div class="card-content">
-          <app-user-view [user]="user"></app-user-view>
+          <app-user-view [user]="userData.user"></app-user-view>
+          <div class="columns">
+            <div class="column is-half">
+              <button
+                class="button is-rounded is-outlined is-fullwidth  is-primary"
+                [ngClass]="userData.isLoading ? 'is-loading' : ''"
+                (click)="editUser(userData.user)"
+              >
+                Edit
+              </button>
+            </div>
+            <div class="column is-half">
+              <button
+                class="button is-rounded is-outlined is-fullwidth is-danger"
+                [ngClass]="userData.isLoading ? 'is-loading' : ''"
+                (click)="deleteUser(userData.user.name)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
-        <footer class="card-footer">
-          <a class="card-footer-item">Edit</a>
-          <a class="card-footer-item has-text-danger" (click)="delete()">Delete</a>
-        </footer>
       </div>
-    </div>
+    </span>
+  </div>
 </div>

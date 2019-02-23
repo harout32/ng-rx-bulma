@@ -9,14 +9,7 @@ import {
   EditUserAction,
   SetLoaderAction
 } from './auth.actions';
-import {
-  tap,
-  mergeMap,
-  catchError,
-  map,
-  finalize,
-  switchMap
-} from 'rxjs/operators';
+import { tap, catchError, map, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { defer, of, EMPTY, throwError } from 'rxjs';
 
@@ -48,30 +41,28 @@ export class AuthEffects {
   @Effect()
   loginApi$ = this.actions$.pipe(
     ofType<LoginApi>(AuthActionTypes.LoginApiAction),
-    switchMap(res => {
-      return this.authService
-        .login(res.payload.name, res.payload.password)
-        .pipe(
-          tap((loginRes: User) => this.dispatchSuccessNotification('welcome', { value: loginRes.name })),
-          map((loginRes: User) => new Login({ user: loginRes })),
+    switchMap(res =>
+      this.authService.login(res.payload.name, res.payload.password)
+    ),
+    tap((loginRes: User) =>
+      this.dispatchSuccessNotification('welcome', {
+        value: loginRes.name
+      })
+    ),
+    map((loginRes: User) => new Login({ user: loginRes })),
 
-          catchError(this.dispatchErrorNotifications.bind(this))
-        );
-    })
+    catchError(this.dispatchErrorNotifications.bind(this))
   );
 
   @Effect()
   apiUserEdit$ = this.actions$.pipe(
     ofType<EditUserApiAction>(AuthActionTypes.EditUserApiAction),
     tap(console.log),
-    switchMap(action => this.authService.editUser(action.payload)
-      .pipe(
-        map(res => new EditUserAction(action.payload)),
-        tap(res => this.dispatchSuccessNotification('successEdit')),
-        tap(res => this.router.navigate(['/'])),
-        catchError(this.dispatchErrorNotifications.bind(this))
-      )
-    )
+    switchMap(action => this.authService.editUser(action.payload)),
+    map(res => new EditUserAction(res)),
+    tap(() => this.dispatchSuccessNotification('successEdit')),
+    tap(() => this.router.navigate(['/'])),
+    catchError(this.dispatchErrorNotifications.bind(this))
   );
 
   @Effect()
@@ -95,12 +86,14 @@ export class AuthEffects {
     return of(new SetLoaderAction(false));
   }
   dispatchSuccessNotification(message: string, ...args) {
-    this.store.dispatch(new AddNotification({ message, type: 'success' }, ...args));
+    this.store.dispatch(
+      new AddNotification({ message, type: 'success' }, ...args)
+    );
   }
   constructor(
     private actions$: Actions,
     private router: Router,
     private authService: AuthService,
     private store: Store<State>
-  ) { }
+  ) {}
 }

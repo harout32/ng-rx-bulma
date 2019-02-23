@@ -4,12 +4,11 @@ import { map, switchMap, catchError, skip, mapTo, tap } from 'rxjs/operators';
 import { timer, of } from 'rxjs';
 
 export function ValidateUserNameNotTaken(
+  initalName: string,
   authService: AuthService
 ): AsyncValidatorFn {
-  let count = 0;
   return (control: AbstractControl) => {
-    count++;
-    if (count < 4) {
+    if (control.value === initalName || control.value.trim() === '') {
       return of(null);
     }
 

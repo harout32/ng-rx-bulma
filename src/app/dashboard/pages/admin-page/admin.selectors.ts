@@ -9,6 +9,8 @@ export const selectAdminUserList = createSelector(
   admin => admin.userList
 );
 export const selectAdminSelectedUser = createSelector(
-    selectAdminState,
-    admin => admin.selectedUser
+  selectAdminState,
+  admin => {
+    return admin.selectedUser;
+  }
 );

@@ -4,12 +4,12 @@ import { User } from 'src/app/models';
 
 export interface AdminState {
   userList: User[];
-  selectedUser: User;
+  selectedUser: { user: User; isLoading: boolean };
 }
 
 const initalAdminState: AdminState = {
   userList: undefined,
-  selectedUser: undefined
+  selectedUser: { user: undefined, isLoading: false }
 };
 
 export function AdminReducer(
@@ -25,7 +25,17 @@ export function AdminReducer(
     case AdminActions.SelectChoosenUser:
       return {
         ...state,
-        selectedUser: action.payload
+        selectedUser: { isLoading: false, user: action.payload }
+      };
+    case AdminActions.DeleteChoosenUser:
+      return {
+        ...state,
+        selectedUser: { ...state.selectedUser, isLoading: true }
+      };
+    case AdminActions.EditChoosenUser:
+      return {
+        ...state,
+        selectedUser: { ...state.selectedUser, isLoading: true }
       };
     default:
       return state;

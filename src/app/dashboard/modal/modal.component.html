@@ -1,10 +1,8 @@
 <div class="modal" [ngClass]="modalIsActive ? 'is-active' : ''">
   <div class="modal-background" #modalBackground></div>
   <div class="modal-card">
-    <header class="modal-card-head">
-      <button class="delete" aria-label="close"></button>
-    </header>
     <section class="modal-card-body">
+        <!-- <button class="delete is-right" aria-label="close"></button> -->
         <ng-template #modalContent></ng-template>
     </section>
   </div>
