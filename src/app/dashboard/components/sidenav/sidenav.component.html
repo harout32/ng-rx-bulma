@@ -1,0 +1,70 @@
+<aside
+  class="menu side-menu"
+  [ngClass]="{ 'side-menu-collaped': sideMenueCollapsed }"
+>
+  <ul class="menu-list">
+    <li class="has-text-centered">
+      <a (click)="toggleSideMenue()">
+        <span class="icons has-text-black ">
+          <i
+            class="typcn "
+            [ngClass]="
+              sideMenueCollapsed ? 'typcn-chevron-right' : 'typcn-chevron-left'
+            "
+          ></i>
+        </span>
+      </a>
+    </li>
+    <ng-template ngFor let-item [ngForOf]="items">
+      <li
+        *ngIf="(item.adminRequired && isAdmin$ | async) || !item.adminRequired"
+      >
+        <a [routerLink]="[item.route]" routerLinkActive="is-active">
+          <span class="icons has-text-black">
+            <i [class]="item.icon"></i>
+          </span>
+          <span class="side-item">
+            {{ item.name | translate }}
+          </span>
+        </a>
+        <ng-template [ngIf]="item.children">
+          <ng-container
+            *ngTemplateOutlet="
+              childrenTemplate;
+              context: { children: item.children }
+            "
+          ></ng-container>
+        </ng-template>
+      </li>
+    </ng-template>
+  </ul>
+</aside>
+
+<ng-template #childrenTemplate let-children="children">
+  <ul>
+    <ng-template ngFor let-child [ngForOf]="children">
+      <li
+        *ngIf="
+          (child.adminRequired && isAdmin$ | async) || !child.adminRequired
+        "
+      >
+        <a [routerLink]="[child.route]" routerLinkActive="is-active">
+          <span class="icons has-text-black">
+            <i [class]="child.icon"></i>
+          </span>
+          <span class="side-item">
+            {{ child.name | translate }}
+          </span>
+        </a>
+        <ng-template [ngIf]="child.children">
+          <ng-container
+            *ngTemplateOutlet="
+              childrenTemplate;
+              context: { children: item.children }
+            "
+          ></ng-container>
+        </ng-template>
+      </li>
+    </ng-template>
+  </ul>
+</ng-template>

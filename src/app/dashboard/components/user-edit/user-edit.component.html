@@ -1,0 +1,209 @@
+<form [formGroup]="editForm" (ngSubmit)="submit()">
+    <div class="field">
+      <label class="label" for="name">{{'common.name' | translate}}</label>
+      <div
+        class="control  has-icons-right"
+        [ngClass]="{
+          'is-loading': editForm.get('name').status === 'PENDING'
+        }"
+      >
+        <input
+          id="name"
+          class="input is-primary  is-rounded"
+          [ngClass]="{
+            'is-danger': isFieldTouched('name') && editForm.get('name').invalid
+          }"
+          type="text"
+          placeholder="a-z no symbol or number"
+          formControlName="name"
+          [readonly]="true"
+        />
+        <span class="icon is-right has-text-primary" *ngIf="!editForm.get('name').hasError('userNameTaken') && editForm.get('name').status !== 'PENDING'">
+          <i class="typcn typcn-tick"></i>
+        </span>
+        <p
+          class="help is-danger"
+          *ngIf="editForm.get('name').hasError('userNameTaken')"
+        >
+         {{'errorMessages.takenName' | translate}}
+        </p>
+        <ng-template
+          [ngIf]="
+            editForm.get('name').hasError('required') && isFieldTouched('name')
+          "
+        >
+          <ng-container
+            *ngTemplateOutlet="showRequiredError; context: { name: 'common.name' | translate }"
+          ></ng-container>
+        </ng-template>
+        <ng-container
+          *ngTemplateOutlet="
+            showCustomError;
+            context: { name: 'name', validator: 'validUserName' }
+          "
+        ></ng-container>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="age">Age</label>
+      <div class="control">
+        <input
+          id="age"
+          class="input is-primary is-rounded"
+          [ngClass]="{
+            'is-danger': isFieldTouched('age') && editForm.get('age').invalid
+          }"
+          type="text"
+          placeholder="18-65"
+          formControlName="age"
+        />
+        <ng-template
+          [ngIf]="
+            editForm.get('age').hasError('required') && isFieldTouched('age')
+          "
+        >
+          <ng-container
+            *ngTemplateOutlet="showRequiredError; context: { name: 'common.age' | translate  }"
+          ></ng-container>
+        </ng-template>
+        <ng-container
+          *ngTemplateOutlet="
+            showCustomError;
+            context: { name: 'age', validator: 'validAge' }
+          "
+        ></ng-container>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="dateOfBirth">Date of Birth</label>
+      <div class="control">
+        <input
+          id="dateOfBirth"
+          class="input is-primary is-rounded"
+          [ngClass]="{
+            'is-danger':
+              isFieldTouched('dateOfBirth') &&
+              editForm.get('dateOfBirth').invalid
+          }"
+          type="text"
+          placeholder="YYYY/MM/DD"
+          formControlName="dateOfBirth"
+        />
+        <ng-template
+          [ngIf]="
+            editForm.get('dateOfBirth').hasError('required') &&
+            isFieldTouched('dateOfBirth')
+          "
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              showRequiredError;
+              context: { name: 'common.dateOfBirth' | translate  }
+            "
+          ></ng-container>
+        </ng-template>
+        <ng-container
+          *ngTemplateOutlet="
+            showCustomError;
+            context: { name: 'dateOfBirth', validator: 'validDate' }
+          "
+        ></ng-container>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="dayOfNextNotification"
+        >Day of Next Notification</label
+      >
+      <div class="control">
+        <input
+          id="dayOfNextNotification"
+          class="input is-primary is-rounded"
+          [ngClass]="{
+            'is-danger':
+              isFieldTouched('dayOfNextNotification') &&
+              editForm.get('dayOfNextNotification').invalid
+          }"
+          type="text"
+          placeholder="DD-MMM-YY"
+          formControlName="dayOfNextNotification"
+        />
+        <ng-template
+          [ngIf]="
+            editForm.get('dayOfNextNotification').hasError('required') &&
+            isFieldTouched('dayOfNextNotification')
+          "
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              showRequiredError;
+              context: { name: 'common.dayOfNextNotification' | translate }
+            "
+          ></ng-container>
+        </ng-template>
+        <ng-container
+          *ngTemplateOutlet="
+            showCustomError;
+            context: { name: 'dayOfNextNotification', validator: 'validDate' }
+          "
+        ></ng-container>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="dayOfLogin">Day of login</label>
+      <div class="control">
+        <input
+          id="dayOfLogin"
+          class="input is-primary is-rounded"
+          [ngClass]="{
+            'is-danger':
+              isFieldTouched('dayOfLogin') && editForm.get('dayOfLogin').invalid
+          }"
+          type="text"
+          placeholder="DD MMM YYYY"
+          formControlName="dayOfLogin"
+        />
+        <ng-template
+          [ngIf]="
+            editForm.get('dayOfLogin').hasError('required') &&
+            isFieldTouched('dayOfLogin')
+          "
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              showRequiredError;
+              context: { name: 'common.dayOfLogin' | translate }
+            "
+          ></ng-container>
+        </ng-template>
+        <ng-container
+          *ngTemplateOutlet="
+            showCustomError;
+            context: { name: 'dayOfLogin', validator: 'validDate' }
+          "
+        ></ng-container>
+      </div>
+    </div>
+    <div class="field buttons is-centered">
+      <button
+        class="button is-primary is-rounded is-centered"
+        [ngClass]="{'is-loading': isLoading}"
+        [disabled]="!editForm.valid"
+        type="submit"
+      >
+        {{'common.save' | translate}}
+      </button>
+    </div>
+  </form>
+  
+  <ng-template #showRequiredError let-name="name">
+    <p class="help is-danger">{{ 'errorMessages.required' | translate:{value: name} }}</p>
+  </ng-template>
+  <ng-template #showCustomError let-name="name" let-validator="validator">
+    <p
+      class="help is-danger"
+      *ngIf="isFieldTouched(name) && editForm.get(name).hasError(validator)"
+    >
+      {{ 'errorMessages.' + editForm.get(name).errors[validator] | translate }}
+    </p>
+  </ng-template>
+  

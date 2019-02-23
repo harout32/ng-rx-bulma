@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "harout",
+    "password": "harout",
+    "age": 18,
+    "dateOfBirth": "1994/03/17",
+    "dayOfNextNotification": "01-MAR-19",
+    "dayOfLogin": "14 FEB 2019",
+    "admin": true
+  },
+  {
+    "id": 2,
+    "name": "haha",
+    "password": "haha",
+    "age": 18,
+    "dateOfBirth": "1994/03/17",
+    "dayOfNextNotification": "01-MAR-19",
+    "dayOfLogin": "14 FEB 2019",
+    "admin": false
+  }
+]

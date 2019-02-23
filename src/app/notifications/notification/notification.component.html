@@ -1,0 +1,13 @@
+<div class="notification-wrapper" *ngFor="let not of (notifications$ | async)">
+  <div
+    class="notification"
+    [ngClass]="{
+      'is-primary': not.type === 'success',
+      'is-danger': not.type === 'danger',
+      warning: not.type === 'is-warning'
+    }"
+  >
+    <button class="delete" (click)="removeNotification(not.id)"></button>
+    {{ 'notificationMessages.' + not.message | translate: not.info }}
+  </div>
+</div>

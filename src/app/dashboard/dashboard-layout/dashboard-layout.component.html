@@ -1,0 +1,59 @@
+<nav
+  class="navbar is-transparent is-info"
+  role="navigation"
+  aria-label="navigation"
+>
+  <div class="navbar-brand">
+    <a class="navbar-item home-icon"  [routerLink]="['/']">
+      <span    
+
+        class="icons has-text-primary"
+      >
+      <i class="typcn typcn-code"></i>
+    </span>
+    </a>
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+      (click)="showUserDropdown = !showUserDropdown"
+      [ngClass]="showUserDropdown ? 'is-active' : ''"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div
+      class="navbar-item"
+      *ngIf="isAdmin$ | async"
+    >
+    
+    <a [routerLink]="['/admin']" routerLinkActive="is-active" >Admin</a>
+  </div>
+  <div
+    class="navbar-menu navbar-end "
+  >
+    <div
+      class="navbar-item"
+    >
+      <a
+      >
+      <span class="user-icon has-text-black" (click)="logout()"  tooltip="log out">
+        <i class="typcn typcn-power"></i>
+      </span>
+      </a>
+
+    </div>
+  </div>
+</nav>
+<div class="side-nav-container">
+
+  <app-sidenav [items]="sideNavItems"></app-sidenav>
+  <div class="side-nav-outlet">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<app-modal></app-modal>

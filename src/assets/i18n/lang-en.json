@@ -1,0 +1,32 @@
+{
+    "notificationMessages": {
+        "welcome": "Welcome back {{value}}",
+        "somethingWentWrong": "Something went wrong !",
+        "invalidLogin": "Invalid name or password !",
+        "successEdit": "Edited Successfuly"
+    },
+    "errorMessages": {
+        "takenName": "This name is already taken",
+        "required": "{{value}} is required !",
+        "invalidAge": "Age should be a number between 18-65",
+        "invalidDate": "Invalid Date!"
+    },
+    "common": {
+        "login" : "Login",
+        "logout": "Logout",
+        "submit": "Submit",
+        "edit": "Edit",
+        "profile": "Profile",
+        "name": "Name",
+        "age": "Age",
+        "dateOfBirth": "Date of birth",
+        "dayOfNextNotification": "Day of next notification",
+        "dayOfLogin": "Day of login",
+        "save": "Save",
+        "searchByName": "Search by name",
+        "users": "Users",
+        "admin":"Admin"
+
+    },
+"HELLO": "asdasdasd"
+}

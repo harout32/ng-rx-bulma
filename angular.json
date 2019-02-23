@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/font/typicons.min.css",
               "src/styles.scss"
             ],
             "scripts": [],

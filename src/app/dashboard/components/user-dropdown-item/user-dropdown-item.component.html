@@ -1,0 +1,11 @@
+
+<div class="card is-paddingless is-fullwidth  list-item " [ngClass]= "(seletedUser$ | async)?.id === user.id ? 'has-text-white has-background-link': 'hoverable'" (click)="select()">
+
+    <div class="card-content card-user-item">
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-4" [ngClass]="(seletedUser$ | async)?.id === user.id ? 'has-text-white': 'is-size-6'">{{user.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,74 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="field">
+    <label class="label" for="name">Name</label>
+    <div class="control">
+      <input
+        id="name"
+        class="input is-primary is-rounded"
+        [ngClass]="{
+          'is-danger': isFieldTouched('name') && loginForm.get('name').invalid
+        }"
+        type="text"
+        placeholder="a-z no symbol or number"
+        formControlName="name"
+      />
+      <ng-template
+        [ngIf]="
+          loginForm.get('name').hasError('required') && isFieldTouched('name')
+        "
+      >
+        <ng-container
+          *ngTemplateOutlet="showRequiredError; context: { name: 'Name' }"
+        ></ng-container>
+      </ng-template>
+      <ng-container
+        *ngTemplateOutlet="
+          showCustomError;
+          context: { name: 'name', validator: 'validUserName' }
+        "
+      ></ng-container>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label" for="password">Name</label>
+    <div class="control">
+      <input
+        id="password"
+        class="input is-primary is-rounded"
+        [ngClass]="{
+          'is-danger':
+            isFieldTouched('password') && loginForm.get('password').invalid
+        }"
+        type="password"
+        placeholder="a-z no symbol or number"
+        formControlName="password"
+      />
+      <ng-template
+        [ngIf]="
+          loginForm.get('password').hasError('required') &&
+          isFieldTouched('password')
+        "
+      >
+        <ng-container
+          *ngTemplateOutlet="showRequiredError; context: { name: 'Password' }"
+        ></ng-container>
+      </ng-template>
+    </div>
+  </div>
+  <div class="field buttons is-centered">
+    <button type="submit" class="button  is-primary is-rounded " [disabled]="!loginForm.valid && isLoading$ | async" [ngClass]="{'is-loading': isLoading$ | async}">
+      Sign In
+    </button>
+  </div>
+</form>
+<ng-template #showRequiredError let-name="name">
+  <p class="help is-danger">{{ name }} is required !</p>
+</ng-template>
+<ng-template #showCustomError let-name="name" let-validator="validator">
+  <p
+    class="help is-danger"
+    *ngIf="isFieldTouched(name) && loginForm.get(name).hasError(validator)"
+  >
+    {{ loginForm.get(name).errors[validator] }}
+  </p>
+</ng-template>

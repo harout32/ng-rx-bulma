@@ -1,16 +1,47 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { TranslateModule, TranslateLoader, TranslatePipe } from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import { AppRoutingModule } from './app-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { reducers, metaReducers } from './reducers';
+import { environment } from '../environments/environment';
+import { AuthModule } from './auth/auth.module';
+import { NotificationComponent } from './notifications/notification/notification.component';
+import { NotificationsEffects } from './notifications/notifications.effects';
+import { HttpClient } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/lang-', '.json');
+}
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotificationComponent,
+    // TranslatePipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    SharedModule,
+    AuthModule.forRoot(),
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([NotificationsEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,19 @@
+<div class="background-gradient">
+  <div class="login-wrapper">
+    
+    <div class="card login-card">
+      <header class="card-header">
+        <div class="tabs is-fullwidth login-tabs">
+          <ul>
+            <li routerLink="/auth/login" routerLinkActive="is-active"><a routerLink="/auth/login">Login</a></li>
+            <li routerLink="/auth/password-recover" routerLinkActive="is-active"><a routerLink="/auth/password-recover">Forget Your Password</a></li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="card-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

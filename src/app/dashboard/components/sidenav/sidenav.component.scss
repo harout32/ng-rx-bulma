@@ -1,0 +1,14 @@
+.side-menu {
+  width: 150px;
+  transition: all 0.2s;
+}
+.side-menu-collaped {
+  width: 85px;
+  .side-item {
+      width: 0;
+    display: none;
+  }
+  li{
+      text-align: center;
+  }
+}

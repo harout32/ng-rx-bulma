@@ -1,0 +1,13 @@
+<div class="columns  is-centered">
+    <div class="column is-half">
+      <div *ngIf="(user$ | async) as user" class="card  ">
+        <div class="card-content">
+          <app-user-view [user]="user"></app-user-view>
+        </div>
+        <footer class="card-footer">
+          <a class="card-footer-item">Edit</a>
+          <a class="card-footer-item has-text-danger" (click)="delete()">Delete</a>
+        </footer>
+      </div>
+    </div>
+</div>

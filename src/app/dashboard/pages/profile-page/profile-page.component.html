@@ -1,0 +1,15 @@
+<div class="card card-wrapper">
+    <header class="card-header">
+        <p class="card-header-title">
+          {{'common.profile'}}
+        </p>
+        <a  class="card-header-icon has-text-black" aria-label="edit profile" [routerLink]="['/profile/edit']" routerLinkActive="has-text-primary"  >
+          <span class="icon" >
+            <i class="typcn typcn-edit" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+  <div class="card-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
