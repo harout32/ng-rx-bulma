@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { State } from '../../reducers';
 import { Logout } from 'src/app/auth/auth.actions';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { isAdmin } from 'src/app/auth/auth.selectors';
-import { SideNavItem } from '../../models';
-import { ModalService } from '../modal/modal.service';
-import { UserDropdownListComponent } from '../components';
-import { take } from 'rxjs/operators';
+import { SideNavItem, RolesEnum } from '../../models';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -22,26 +19,31 @@ export class DashboardLayoutComponent implements OnInit {
       name: 'common.profile',
       route: '/profile',
       icon: 'typcn typcn-clipboard',
-      adminRequired: false
+      requiredRole: RolesEnum.all
     },
     {
       name: 'common.admin',
       route: '/admin',
       icon: 'typcn typcn-key',
-      adminRequired: true,
+      requiredRole: RolesEnum.admin,
       children: [
         {
           name: 'common.users',
           icon: 'typcn typcn-group',
           route: '/admin/users',
-          adminRequired: true
+          requiredRole: RolesEnum.admin
         }
       ]
+    },
+    {
+      name: 'common.feedback',
+      route: '/feedback',
+      icon: '',
+      requiredRole: RolesEnum.user
     }
   ];
   constructor(
     private store: Store<State>,
-    private modalService: ModalService
   ) {}
 
   ngOnInit() {

@@ -13,6 +13,7 @@ import {
 import { User } from '../../../models';
 import { tap } from 'rxjs/operators';
 import { ModalService } from '../../modal/modal.service';
+import { AdminApiService } from '../../pages/admin-page/admin-api.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -25,8 +26,8 @@ export class UserEditComponent implements OnInit {
   editForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private adminApiService: AdminApiService
   ) {}
 
   ngOnInit() {
@@ -34,7 +35,7 @@ export class UserEditComponent implements OnInit {
       name: [
         '',
         [Validators.required, ValidUserName],
-        ValidateUserNameNotTaken(this.user.name, this.authService)
+        ValidateUserNameNotTaken(this.user.name, this.adminApiService)
       ],
       age: ['', [Validators.required, ValidAge]],
       dateOfBirth: ['', [Validators.required, ValidDate('YYYY/MM/DD')]],

@@ -1,32 +1,46 @@
-<aside
-  class="menu side-menu has-background-primary"
-  [ngClass]="{ 'side-menu-collaped': sideMenueCollapsed }"
->
-<div class="flex">
+<aside class="menu side-menu has-background-primary" [ngClass]="{ 'side-menu-collaped': sideMenueCollapsed }">
+  <div class="flex">
 
-
-  <ul class="menu-list items">
-    <li class="has-text-centered">
-      <a (click)="toggleSideMenue()" class="has-text-white">
-        <span class="icons ">
-          <i
-            class="typcn "
-            [ngClass]="
+    <ul class="menu-list collapse">
+      <li class="has-text-centered">
+        <a (click)="toggleSideMenue()" class="has-text-white">
+          <span class="icons ">
+            <i class="typcn " [ngClass]="
               sideMenueCollapsed ? 'typcn-chevron-right' : 'typcn-chevron-left'
-            "
-          ></i>
-        </span>
-      </a>
-    </li>
+            "></i>
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <ng-container *ngTemplateOutlet="
+    itemsTemplate;
+  context: { items: items }
+  ">
+    </ng-container>
+
+    <ul class="menu-list logout">
+      <li>
+        <a class="has-text-white" (click)="logout()">
+          <span class="icons">
+            <i class="typcn typcn-power"></i>
+          </span>
+          <span class="side-item">
+            {{ 'common.logout' | translate }}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+
+<ng-template let-items="items" #itemsTemplate>
+  <ul class="menu-list items">
     <ng-template ngFor let-item [ngForOf]="items">
-      <li
-        *ngIf="(item.adminRequired && isAdmin$ | async) || !item.adminRequired"
-      >
-        <a
-          [routerLink]="[item.route]"
-          class="has-text-white"
-          routerLinkActive="has-background-white-ter has-text-primary"
-        >
+      <li *ngIf="item.requiredRole === roleEnum.all || (item.requiredRole === roleEnum.admin && isAdmin$ | async) || (item.requiredRole === roleEnum.user && !(isAdmin$ | async))">
+        <a [routerLink]="[item.route]" class="has-text-white"
+          routerLinkActive="has-background-white-ter has-text-primary">
           <span class="icons">
             <i [class]="item.icon"></i>
           </span>
@@ -35,60 +49,13 @@
           </span>
         </a>
         <ng-template [ngIf]="item.children">
-          <ng-container
-            *ngTemplateOutlet="
-              childrenTemplate;
-              context: { children: item.children }
-            "
-          ></ng-container>
+          <ng-container *ngTemplateOutlet="
+          itemsTemplate;
+              context: { items: item.children }
+            "></ng-container>
         </ng-template>
       </li>
     </ng-template>
   </ul>
-  <ul class="menu-list logout">
-    <li>
-      <a class="has-text-white" (click)="logout()">
-        <span class="icons">
-          <i class="typcn typcn-power"></i>
-        </span>
-        <span class="side-item">
-          {{ 'common.logout' | translate }}
-        </span>
-      </a>
-    </li>
-  </ul>
-</div>
-</aside>
 
-<ng-template #childrenTemplate let-children="children">
-  <ul>
-    <ng-template ngFor let-child [ngForOf]="children">
-      <li
-        *ngIf="
-          (child.adminRequired && isAdmin$ | async) || !child.adminRequired
-        "
-      >
-        <a
-          [routerLink]="[child.route]"
-          class="has-text-white"
-          routerLinkActive="has-background-white-ter has-text-primary"
-        >
-          <span class="icons">
-            <i [class]="child.icon"></i>
-          </span>
-          <span class="side-item">
-            {{ child.name | translate }}
-          </span>
-        </a>
-        <ng-template [ngIf]="child.children">
-          <ng-container
-            *ngTemplateOutlet="
-              childrenTemplate;
-              context: { children: item.children }
-            "
-          ></ng-container>
-        </ng-template>
-      </li>
-    </ng-template>
-  </ul>
 </ng-template>

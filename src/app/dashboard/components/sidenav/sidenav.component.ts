@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SideNavItem } from '../../../models';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { SideNavItem, RolesEnum } from '../../../models';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { State } from '../../../reducers';
@@ -10,11 +10,13 @@ import { Logout } from '../../../auth/auth.actions';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavComponent implements OnInit {
   @Input() items: SideNavItem[];
   isAdmin$: Observable<boolean>;
+  readonly roleEnum = RolesEnum;
   sideMenueCollapsed = false;
   constructor(private store: Store<State>) {}
 

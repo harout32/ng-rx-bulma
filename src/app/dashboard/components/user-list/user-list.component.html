@@ -7,7 +7,7 @@
 </div>
 <div class="columns">
   <div class="column" style="width: 100%">
-    <form [formGroup]="searchForm">
+    <form [formGroup]="searchForm" class="z-i-1">
       <div class="field">
         <div class="control" [ngClass]="isSearchLoading ? 'is-loading' : ''">
           <input
@@ -15,11 +15,12 @@
             type="text"
             placeholder="{{ 'common.searchByName' | translate }}"
             formControlName="search"
+            (focus)="focus($event)"
           />
         </div>
       </div>
     </form>
-    <app-user-dropdown-list >
+    <app-user-dropdown-list class="z-i-1">
       <ng-template ngFor let-user [ngForOf]="(userList$ | async)">
         <app-user-dropdown-item [user]="user" [seletedUser$]="selectedUser$" (whenSelect)="selectUser($event)"></app-user-dropdown-item>
       </ng-template>
@@ -38,4 +39,5 @@
   </div>-->
   
 </div>
+<div [ngClass]="overlay? 'overlay': 'none'" (click)="closeDropDown()"></div>
 <!-- input type="text" [(ngModel)]="searchText" (ngModelChange)="reSearch(newValue)" placeholder="Search"> -->

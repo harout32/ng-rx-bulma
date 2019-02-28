@@ -19,8 +19,7 @@ import { tap } from 'rxjs/operators';
 })
 export class ModalComponent implements OnInit, AfterViewInit {
   @ViewChild('modalBackground') modalBackground: ElementRef;
-  @ViewChild('modalContent', { read: ViewContainerRef })
-  entry: ViewContainerRef;
+  @ViewChild('modalContent', { read: ViewContainerRef }) entry: ViewContainerRef;
   componentRef: ComponentRef<any>;
   modalIsActive = false;
   backgroundClick$: Observable<HTMLElementEventMap>;

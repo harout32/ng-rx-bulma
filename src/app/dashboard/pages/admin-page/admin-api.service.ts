@@ -26,4 +26,14 @@ export class AdminApiService {
     console.log({ id }, 'edit');
     return of(data).pipe(delay(2000));
   }
+  validateUserName(userName: string) {
+    return this.httpClient.get<User[]>('assets/users.json').pipe(
+      map((usersResponse: User[]) => {
+        return usersResponse.filter(user => {
+          return user.name === userName;
+        });
+      }),
+      delay(3000)
+    );
+  }
 }

@@ -18,5 +18,35 @@
     "dayOfNextNotification": "01-MAR-19",
     "dayOfLogin": "14 FEB 2019",
     "admin": false
+  },
+  {
+    "id": 3,
+    "name": "jhone doe",
+    "password": "haha",
+    "age": 18,
+    "dateOfBirth": "1994/03/17",
+    "dayOfNextNotification": "01-MAR-19",
+    "dayOfLogin": "14 FEB 2019",
+    "admin": false
+  },
+  {
+    "id": 4,
+    "name": "jane dove",
+    "password": "haha",
+    "age": 18,
+    "dateOfBirth": "1994/03/17",
+    "dayOfNextNotification": "01-MAR-19",
+    "dayOfLogin": "14 FEB 2019",
+    "admin": false
+  },
+  {
+    "id": 5,
+    "name": "kristin ben",
+    "password": "haha",
+    "age": 18,
+    "dateOfBirth": "1994/03/17",
+    "dayOfNextNotification": "01-MAR-19",
+    "dayOfLogin": "14 FEB 2019",
+    "admin": false
   }
 ]
