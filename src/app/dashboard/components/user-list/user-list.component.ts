@@ -27,6 +27,7 @@ export class UserListComponent implements OnInit {
   isSearchLoading = false;
   userList$: Observable<User[]>;
   selectedUser$: Observable<User[]>;
+  overlay = false;
   constructor(
     private fb: FormBuilder,
     private adminApiService: AdminApiService,
@@ -67,6 +68,7 @@ export class UserListComponent implements OnInit {
       .subscribe(noop);
   }
   selectUser(user: User) {
+    this.overlay = false;
     this.setUserNameToSearchInput(user.name);
     this.store.dispatch(new SelectChoosenUserAction(user));
     this.store.dispatch(new SetUserListAction([]));
@@ -77,6 +79,13 @@ export class UserListComponent implements OnInit {
   editUser(user: User) {
     this.setUserNameToSearchInput(user.name);
     this.store.dispatch(new EditChoosenUserAction(user));
+  }
+  focus() {
+    this.overlay = true;
+  }
+  closeDropDown() {
+    this.overlay = false;
+    this.store.dispatch(new SetUserListAction([]));
   }
   private setUserNameToSearchInput(name: string) {
     this.searchForm.patchValue(

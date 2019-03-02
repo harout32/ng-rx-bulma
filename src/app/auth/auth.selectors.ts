@@ -27,5 +27,5 @@ export const userProfile = createSelector(
 );
 export const isAdmin = createSelector(
   selectLoggedInUser,
-  user => user.admin
+  user => user ? user.admin : false
 );

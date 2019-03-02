@@ -12,6 +12,7 @@ import {
   PersonalInfoComponent
 } from '../dashboard/components';
 import { SharedModule } from './shared.module';
+import { AdminApiService } from '../dashboard/pages/admin-page/admin-api.service';
 
 const COMPONENTS = [
   SidenavComponent,
@@ -29,6 +30,6 @@ const COMPONENTS = [
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS],
   entryComponents: [CanfirmComponent, UserEditComponent],
-  providers: []
+  providers: [AdminApiService]
 })
 export class DashboardSharedComponentsModule {}

@@ -1,7 +1,9 @@
 <div class="confirm-wrapper">
-  <div class="card-content">    
-    <p class="is-size-5">{{ message | translate: params }}</p>
-    <div class="buttons">
+  <div class="card-content">
+    <div class="title">
+      <p class="is-size-5">{{ message | translate: params }}</p>
+    </div>
+    <div class="buttons is-centered">
       <span class="button is-success is-rounded" (click)="success()"
         >Confirm</span
       >

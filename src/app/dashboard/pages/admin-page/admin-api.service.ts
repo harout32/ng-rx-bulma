@@ -32,4 +32,14 @@ export class AdminApiService {
       delay(1000)
     );
   }
+  validateUserName(userName: string) {
+    return this.httpClient.get<User[]>('assets/users.json').pipe(
+      map((usersResponse: User[]) => {
+        return usersResponse.filter(user => {
+          return user.name === userName;
+        });
+      }),
+      delay(3000)
+    );
+  }
 }

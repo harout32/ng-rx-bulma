@@ -5,7 +5,6 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { AdminApiService } from './admin-api.service';
 import { AdminEffects } from './admin.effects';
 
 import * as fromAdmin from './admin.reducer';
@@ -38,6 +37,5 @@ const routes: Routes = [
     AdminPageComponent,
     UsersPageComponent
   ],
-  providers: [AdminApiService]
 })
 export class AdminModule {}
