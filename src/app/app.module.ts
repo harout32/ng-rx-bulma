@@ -14,8 +14,9 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { NotificationComponent } from './notifications/notification/notification.component';
 import { NotificationsEffects } from './notifications/notifications.effects';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { HttpMainInterceptor } from './interceptors/http-main.interceptor';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/lang-', '.json');
@@ -43,7 +44,11 @@ export function createTranslateLoader(http: HttpClient) {
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([NotificationsEffects]),
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpMainInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

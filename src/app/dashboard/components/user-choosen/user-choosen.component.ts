@@ -3,7 +3,7 @@ import { Observable, noop } from 'rxjs';
 import { User } from '../../../models';
 import { ModalService } from '../../modal/modal.service';
 import { CanfirmComponent } from '../canfirm/canfirm.component';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 
 @Component({
@@ -12,29 +12,39 @@ import { UserEditComponent } from '../user-edit/user-edit.component';
   styleUrls: ['./user-choosen.component.scss']
 })
 export class UserChoosenComponent implements OnInit {
-  @Input() user$: Observable<{user: User; isLoading: boolean}>;
+  @Input() user$: Observable<{ user: User; isLoading: boolean }>;
   @Output() delete: EventEmitter<void> = new EventEmitter();
   @Output() edit: EventEmitter<User> = new EventEmitter();
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   deleteUser(userName: string) {
-    this.modalService.create(CanfirmComponent, {message: 'confirm.deleteUser', params: {value: userName}})
-    .pipe(tap((data) => {
-      console.log(data);
-      if (data) {
-        this.delete.emit();
-      }
-    })).subscribe(noop);
+    this.modalService
+      .create(CanfirmComponent, {
+        message: 'confirm.deleteUser',
+        params: { value: userName }
+      })
+      .pipe(
+        tap(data => {
+          if (data) {
+            this.delete.emit();
+          }
+        })
+      )
+      .subscribe(noop);
   }
   editUser(user: User) {
-    this.modalService.create(UserEditComponent, {user, allowEditName: true})
-    .pipe(tap((userEditedData) => {
-      console.log('edit on close');
-      if (userEditedData) {
-        this.edit.emit(userEditedData);
-      }
-    })).subscribe(noop);
+    this.modalService
+      .create(UserEditComponent, { user, allowEditName: true })
+      .pipe(
+        tap(userEditedData => {
+          if (userEditedData) {
+            this.edit.emit(userEditedData);
+          }
+        })
+      )
+      .subscribe(noop, noop, () => {
+        console.log('completed');
+      });
   }
 }

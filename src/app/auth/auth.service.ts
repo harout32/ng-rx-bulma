@@ -35,8 +35,7 @@ export class AuthService {
   }
   editUser(userData: UserEdit) {
     return of(userData).pipe(
-      delay(3000),
-      tap(console.log)
+      delay(3000)
     );
   }
 }

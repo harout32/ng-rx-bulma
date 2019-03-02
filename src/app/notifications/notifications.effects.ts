@@ -14,7 +14,7 @@ export class NotificationsEffects {
   @Effect()
   addNotification$ = this.actions$.pipe(
     ofType<AddNotification>(NotificationsActionTypes.addNotificationAction),
-    mergeMap((action) => timer(3000)
+    mergeMap((action) => timer(10000)
     .pipe(
         map(() => new RemoveNotification({ id: action.payload.id }))
         )

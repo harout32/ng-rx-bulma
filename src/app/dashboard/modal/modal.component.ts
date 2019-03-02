@@ -40,7 +40,6 @@ export class ModalComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.backgroundClick$
       .pipe(
-        tap(() => console.log('back, click')),
         tap(() => this.modalService.close(null))
       )
       .subscribe(noop);

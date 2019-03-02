@@ -58,7 +58,6 @@ export class UserListComponent implements OnInit {
               return this.adminApiService.getUsersByName(searchValue);
             }),
             tap(users => {
-              console.log(users);
               this.isSearchLoading = false;
               this.store.dispatch(new SetUserListAction(users));
             })
@@ -73,7 +72,6 @@ export class UserListComponent implements OnInit {
     this.store.dispatch(new SetUserListAction([]));
   }
   deleteUser() {
-    console.log('delete');
     this.store.dispatch(new DeleteChoosenUserAction());
   }
   editUser(user: User) {

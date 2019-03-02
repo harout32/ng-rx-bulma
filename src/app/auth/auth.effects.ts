@@ -57,7 +57,6 @@ export class AuthEffects {
   @Effect()
   apiUserEdit$ = this.actions$.pipe(
     ofType<EditUserApiAction>(AuthActionTypes.EditUserApiAction),
-    tap(console.log),
     switchMap(action => this.authService.editUser(action.payload)),
     map(res => new EditUserAction(res)),
     tap(() => this.dispatchSuccessNotification('successEdit')),

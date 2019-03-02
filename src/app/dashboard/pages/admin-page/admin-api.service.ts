@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, switchMap } from 'rxjs/operators';
 import { timer, of, Observable } from 'rxjs';
 
 @Injectable()
@@ -12,18 +12,24 @@ export class AdminApiService {
     return this.httpClient.get<User[]>('assets/users.json').pipe(
       map((usersResponse: User[]) => {
         return usersResponse.filter(
-          user => user.name.includes(name) && name !== '' && user.id !== userData.id
+          user =>
+            user.name.includes(name) && name !== '' && user.id !== userData.id
         );
       }),
-      delay(500)
+      delay(1000)
     );
   }
   deleteUserById(id) {
     console.log({ id }, 'delete');
-    return timer(2000);
+    return this.httpClient
+      .get<User[]>('assets/users.json')
+      .pipe(switchMap(() => timer(1000)));
   }
   editUserById(id: number, data: User): Observable<User> {
     console.log({ id }, 'edit');
-    return of(data).pipe(delay(2000));
+    return this.httpClient.get<User[]>('assets/users.json').pipe(
+      switchMap(() => of(data)),
+      delay(1000)
+    );
   }
 }
