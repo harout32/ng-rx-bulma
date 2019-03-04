@@ -38,7 +38,7 @@ export class DashboardLayoutComponent implements OnInit {
     {
       name: 'common.feedback',
       route: '/feedback',
-      icon: '',
+      icon: 'typcn typcn-beer',
       requiredRole: RolesEnum.user
     }
   ];

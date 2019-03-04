@@ -1,13 +1,12 @@
-<div class="confirm-wrapper">
-  <div class="card-content">
-    <div class="title">
+
+  <div class="card-content modal-container">
+    <div class="modal-main-content">
       <p class="is-size-5">{{ message | translate: params }}</p>
     </div>
-    <div class="buttons is-centered">
+    <div class="buttons is-centered modal-footer-buttons">
       <span class="button is-success is-rounded" (click)="success()"
-        >Confirm</span
+        >{{'common.confirm' | translate}}</span
       >
-      <span class="button is-danger is-rounded" (click)="cancel()">Cancel</span>
+      <span class="button is-danger is-rounded" (click)="cancel()">{{'common.cancel' | translate}}</span>
     </div>
   </div>
-</div>

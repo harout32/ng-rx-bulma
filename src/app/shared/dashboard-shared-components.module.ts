@@ -9,7 +9,9 @@ import {
   UserViewComponent,
   CanfirmComponent,
   UserEditComponent,
-  PersonalInfoComponent
+  PersonalInfoComponent,
+  FeedbackFormComponent,
+  FeedbackMessageViewComponent
 } from '../dashboard/components';
 import { SharedModule } from './shared.module';
 import { AdminApiService } from '../dashboard/pages/admin-page/admin-api.service';
@@ -23,13 +25,15 @@ const COMPONENTS = [
   UserViewComponent,
   CanfirmComponent,
   UserEditComponent,
-  PersonalInfoComponent
+  PersonalInfoComponent,
+  FeedbackFormComponent,
+  FeedbackMessageViewComponent
 ];
 @NgModule({
   imports: [SharedModule],
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS],
-  entryComponents: [CanfirmComponent, UserEditComponent],
+  entryComponents: [CanfirmComponent, UserEditComponent, FeedbackMessageViewComponent],
   providers: [AdminApiService]
 })
 export class DashboardSharedComponentsModule {}

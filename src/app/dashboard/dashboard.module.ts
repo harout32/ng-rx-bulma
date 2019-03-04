@@ -9,6 +9,7 @@ import { AdminCanActivateGuard } from './guards/admin-can-activate.guard';
 import { DashboardSharedComponentsModule } from '../shared/dashboard-shared-components.module';
 import { ModalComponent } from './modal/modal.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
+import { FeedbackComponent } from './pages/feedback/feedback.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,9 @@ const routes: Routes = [
         canLoad: [AdminCanLoadGuard],
         canActivate: [AdminCanActivateGuard]
       },
+      {
+        path: 'feedback', component: FeedbackComponent
+      },
       { path: 'not-found', component: NotFoundPageComponent },
       { path: '**', redirectTo: '/not-found' }
     ]
@@ -47,9 +51,10 @@ const routes: Routes = [
     ProfilePageComponent,
     NotFoundPageComponent,
     DashboardLayoutComponent,
-    ModalComponent
+    ModalComponent,
+    FeedbackComponent
   ],
 
   providers: [AdminCanLoadGuard, AdminCanActivateGuard]
 })
-export class DashboardModule {}
+export class DashboardModule { }

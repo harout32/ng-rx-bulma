@@ -1,0 +1,16 @@
+<div class="modal-container">
+  <div class="modal-main-content">
+    <div>
+      {{'common.name' | translate}} : {{message.name}}
+    </div>
+    <div>
+      {{'common.email' | translate}} : {{message.email}}
+    </div>
+    <div>
+      {{'common.message' | translate}} : {{message.message}}
+    </div>
+  </div>
+  <div class="buttons is-centered modal-footer-buttons">
+    <span class="button is-primary is-rounded" (click)="cancel()">{{'common.ok' | translate}}</span>
+  </div>
+</div>

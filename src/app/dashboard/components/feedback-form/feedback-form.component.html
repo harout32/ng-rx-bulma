@@ -1,0 +1,47 @@
+
+<form [formGroup]="feedbackForm" (ngSubmit)="submit()">
+  <div class="field">
+    <h4 class="is-centered has-text-weight-bold">Write a feedback</h4>
+  </div>
+    <div class="field">
+        <label class="label">{{'common.name' | translate}}</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-primary" type="text" [placeholder]="'common.name' | translate" formControlName="name">
+          <span class="icon is-small is-left">
+            <i class="typcn typcn-user"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="typcn typcn-check"></i>
+          </span>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label class="label">{{'common.email' | translate}}</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-primary" type="email" placeholder="example@mail.com" formControlName="email" [ngClass]="{'is-danger': feedbackForm.get('email').hasError('email') && feedbackForm.get('email').touched}">
+          <span class="icon is-small is-left">
+            <i class="typcn typcn-mail"></i>
+          </span>
+  
+        </div>
+        <p class="help is-danger" *ngIf="feedbackForm.get('email').hasError('email') && feedbackForm.get('email').touched">{{'errorMessages.wrongEmail' | translate}}</p>
+      </div>
+      
+      
+      <div class="field">
+        <label class="label">{{'common.message' | translate}}</label>
+        <div class="control">
+          <textarea class="textarea is-primary" [placeholder]="'common.message' | translate" formControlName="message"></textarea>
+        </div>
+      </div>
+      <div class="field buttons is-centered">
+          <button
+            class="button is-primary is-rounded is-centered"
+            [disabled]="!feedbackForm.valid"
+            type="submit"
+          >
+            {{'common.send' | translate}}
+          </button>
+        </div>
+</form>

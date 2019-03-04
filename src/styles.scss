@@ -90,3 +90,14 @@
     #00d1b2
   );
 }
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 230px;
+}
+.modal-main-content{
+  flex-grow: 1;
+}
+.modal-footer-buttons{
+justify-self: end;
+}

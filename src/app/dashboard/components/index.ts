@@ -7,3 +7,5 @@ export * from './user-list/user-list.component';
 export * from './user-view/user-view.component';
 export * from './user-edit/user-edit.component';
 export * from './canfirm/canfirm.component';
+export * from './feedback-form/feedback-form.component';
+export * from './feedback-message-view/feedback-message-view.component';

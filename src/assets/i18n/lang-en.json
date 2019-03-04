@@ -9,7 +9,8 @@
     "takenName": "This name is already taken",
     "required": "{{value}} is required !",
     "invalidAge": "Age should be a number between 18-65",
-    "invalidDate": "Invalid Date!"
+    "invalidDate": "Invalid Date!",
+    "wrongEmail": "Wrong Email !"
   },
   "common": {
     "login": "Login",
@@ -26,7 +27,14 @@
     "searchByName": "Search by name",
     "users": "Users",
     "admin": "Admin",
-    "personalInfo": "Personal Info"
+    "personalInfo": "Personal Info",
+    "feedback": "Feedback",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "ok": "OK"
   },
   "confirm": {
     "deleteUser": "You are about to delete the user {{value}} permanently !"
